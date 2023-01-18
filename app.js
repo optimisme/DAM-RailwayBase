@@ -3,8 +3,8 @@ const fs = require('fs/promises')
 const https = require('https')
 var mysql = require('mysql2');
 const url = require('url')
-const post = require('./post.js')
 const { v4: uuidv4 } = require('uuid')
+const post = require('./post.js')
 
 // Iniciar servidors HTTP
 const app = express()
@@ -31,7 +31,7 @@ async function getIndex (req, res) {
 // Definir URL per les dades tipus POST
 app.post('/dades', getDades)
 async function getDades (req, res) {
-  let receivedPOST = await post.getPostObject(req)
+  let receivedPOST = await post.getPostData(req)
   let result = {};
 
   if (receivedPOST) {
@@ -48,20 +48,6 @@ async function getDades (req, res) {
     if (receivedPOST.type == "listTables") {
       result = { result: await queryDatabase(`SHOW TABLES`) }
     }
-  }
-
-  res.writeHead(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify(result))
-}
-
-// Definir URL per les dades tipus "File upload" POST
-app.post('/file', getFile)
-async function getFile (req, res) {
-  let receivedPOST = await post.getPostFile(req)
-  let result = {};
-
-  if (receivedPOST) {
-    
   }
 
   res.writeHead(200, { 'Content-Type': 'application/json' })

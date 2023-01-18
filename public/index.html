@@ -21,7 +21,8 @@
         <br/><button onclick="sendMessage('bounce')">Enviar Bounce</button>POST amb parametres: "type": "bounce", "value": (el valor del camp de text 'missatge')
         <br/><button onclick="sendMessage('broadcast')">Enviar Broadcast</button>POST amb parametres "type": "broadcast", "value": (el valor del camp de text 'missatge')
         <br/><button onclick="sendWebSocket()">Enviar amb WebSockets</button>Enviar el valor del camp de text 'missatge' per WebSockets
-
+        <br/><br/>
+        <br/><button onclick="sendMessage('listTables')">Llistar taules de la base de dades</button>POST amb parametre: "type": "listTables" }
         <br/><br/>
         <br/>Missatges rebuts amb POST:
         <br/><div id="data" class="answer"></div>

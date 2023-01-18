@@ -1,3 +1,7 @@
+Instal·lar comanda Railway:
+
+    npm i -g @railway/cli
+
 Linkar projecte amg Railway:
 
     railway login --browserless

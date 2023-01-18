@@ -1,6 +1,7 @@
 const express = require('express')
 const fs = require('fs/promises')
 const https = require('https')
+var mysql = require('mysql');
 const url = require('url')
 const post = require('./post.js')
 const { v4: uuidv4 } = require('uuid')
@@ -43,6 +44,9 @@ async function getDades (req, res) {
     if (receivedPOST.type == "broadcast") {
       result = { result: `Has demanat fer un broadcast del missatge: ${receivedPOST.text}` }
       broadcast({ type: "broadcastResponse", text: receivedPOST.text })
+    }
+    if (receivedPOST.type == "listTables") {
+      result = { result: await getDatabaseTables() }
     }
   }
 
@@ -96,5 +100,26 @@ async function broadcast (obj) {
       var messageAsString = JSON.stringify(obj)
       client.send(messageAsString)
     }
+  })
+}
+
+// Get the list of database tables from mysql
+function getDatabaseTables () {
+
+  return new Promise((resolve, reject) => {
+    var connection = mysql.createConnection({
+      host: process.env.MYSQLHOST || "localhost",
+      port: process.env.MYSQLPORT || 3306,
+      user: process.env.MYSQLUSER || "root",
+      password: process.env.MYSQLPASSWORD || "",
+      database: process.env.MYSQLDATABASE || "test"
+    });
+    
+    connection.execute('SHOW TABLES', function (error, results, fields) {
+      if (error) reject(error);
+      resolve(results)
+    });
+     
+    connection.end();
   })
 }

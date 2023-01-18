@@ -3,7 +3,7 @@ const url = require('url')
 class Obj {
 
     // Agafa les dades que arriben d'una crida POST i retorna un objecte JSON
-    static getPostData (request) {
+    static getPostObject (request) {
         return new Promise(async (resolve, reject) => {
             let body = '',
                 error = null

@@ -31,7 +31,7 @@ async function getIndex (req, res) {
 // Definir URL per les dades tipus POST
 app.post('/dades', getDades)
 async function getDades (req, res) {
-  let receivedPOST = await post.getPostData(req)
+  let receivedPOST = await post.getPostObject(req)
   let result = {};
 
   if (receivedPOST) {
@@ -48,6 +48,20 @@ async function getDades (req, res) {
     if (receivedPOST.type == "listTables") {
       result = { result: await queryDatabase(`SHOW TABLES`) }
     }
+  }
+
+  res.writeHead(200, { 'Content-Type': 'application/json' })
+  res.end(JSON.stringify(result))
+}
+
+// Definir URL per les dades tipus "File upload" POST
+app.post('/file', getFile)
+async function getFile (req, res) {
+  let receivedPOST = await post.getPostFile(req)
+  let result = {};
+
+  if (receivedPOST) {
+    
   }
 
   res.writeHead(200, { 'Content-Type': 'application/json' })

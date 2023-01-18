@@ -1,14 +1,9 @@
 Linkar projecte amg Railway:
 
     railway login --browserless
+    railway init
+    (Definir un nom de projecte "Server")
     railway link
-
-Actualitzar canvis al servidor Railway:
-
-    git add .
-    git commit -m "Canvis ..."
-    git push
-    railway up
 
 Fer anar el projecte al servidor Railway:
 
@@ -21,6 +16,13 @@ Fer anar el projecte al servidor Railway:
     * En local executar:
 
         railway run npm start
+
+Actualitzar canvis al servidor Railway:
+
+    git add .
+    git commit -m "Canvis ..."
+    git push
+    railway up
 
 Ajuda Railway:
 

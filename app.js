@@ -115,7 +115,7 @@ function getDatabaseTables () {
       database: process.env.MYSQLDATABASE || "test"
     });
 
-    connection.query(`SHOW TABLES`, function(error, results){ 
+    connection.query(`SELECT * FROM test`, function(error, results){ 
       if (error) reject(error);
       resolve(results)
     });

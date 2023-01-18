@@ -1,0 +1,28 @@
+Linkar projecte amg Railway:
+
+    railway login --browserless
+    railway link
+
+Actualitzar canvis al servidor Railway:
+
+    git add .
+    git commit -m "Canvis ..."
+    git push
+    railway up
+
+Fer anar el projecte al servidor Railway:
+
+    * Configurar el projecte Railway: Settings > Start Command amb: 
+
+        npm start
+
+    * Configurar el projecte Railway: Settings > Domains amb un domini
+
+    * En local executar:
+
+        railway run npm start
+
+Ajuda Railway:
+
+https://docs.railway.app/reference/cli-api
+

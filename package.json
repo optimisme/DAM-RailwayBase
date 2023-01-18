@@ -1,0 +1,25 @@
+{
+  "name": "myApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "latest",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1",
+    "nodemon": "latest",
+    "uuid": "^9.0.0",
+    "ws": "^8.12.0"
+  },
+  "scripts": {
+    "dev": "nodemon app.js",
+    "app": "forever app.js",
+    "start": "forever app.js"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.7",
+    "utf-8-validate": "^6.0.0"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+        <link href="/estil.css" rel="stylesheet">
+        <script src="/script.js"></script>
+        <title>Pàgina principal</title>
+    </head>
+    <body>
+        <br/><a href="/direccioURL">GET a la /direccioURL (navegar-hi normalment)</a>
+        <br/><br/>
+        <br/>Missatge: <input type="text" id="missatge"/>
+        <br/><button onclick="sendHerois()">Enviar Herois</button>POST amb parametre: "type": "herois"
+        <br/><button onclick="sendMessage('bounce')">Enviar Bounce</button>POST amb parametres: "type": "bounce", "value": (el valor del camp de text 'missatge')
+        <br/><button onclick="sendMessage('broadcast')">Enviar Broadcast</button>POST amb parametres "type": "broadcast", "value": (el valor del camp de text 'missatge')
+        <br/><button onclick="sendWebSocket()">Enviar amb WebSockets</button>Enviar el valor del camp de text 'missatge' per WebSockets
+
+        <br/><br/>
+        <br/>Missatges rebuts amb POST:
+        <br/><div id="data" class="answer"></div>
+        <br/>Missatges rebuts amb WebSockets:
+        <br/><div id="dataWebSockets"class="answer"></div>
+    </body>
+</html>

@@ -114,8 +114,8 @@ function getDatabaseTables () {
       password: process.env.MYSQLPASSWORD || "",
       database: process.env.MYSQLDATABASE || "test"
     });
-    
-    connection.execute('SHOW TABLES', function (error, results, fields) {
+
+    connection.query(`SELECT table_name FROM information_schema.tables`, function(error, results){ 
       if (error) reject(error);
       resolve(results)
     });

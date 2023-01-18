@@ -11,7 +11,7 @@ Linkar projecte amg Railway:
 
 Fer anar el projecte al servidor Railway:
 
-    * Configurar el projecte Railway: Settings > Start Command amb: 
+    * Configurar el projecte Railway: Settings > "Start Command" amb: 
 
         npm start
 

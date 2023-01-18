@@ -46,7 +46,7 @@ async function getDades (req, res) {
       broadcast({ type: "broadcastResponse", text: receivedPOST.text })
     }
     if (receivedPOST.type == "listTables") {
-      result = { result: await queryDatabase(`SELECT * FROM test`) }
+      result = { result: await queryDatabase(`SHOW TABLES`) }
     }
   }
 

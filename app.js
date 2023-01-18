@@ -46,7 +46,7 @@ async function getDades (req, res) {
       broadcast({ type: "broadcastResponse", text: receivedPOST.text })
     }
     if (receivedPOST.type == "listTables") {
-      result = { result: await getDatabaseTables() }
+      result = { result: await queryDatabase(`SELECT * FROM test`) }
     }
   }
 
@@ -104,7 +104,7 @@ async function broadcast (obj) {
 }
 
 // Get the list of database tables from mysql
-function getDatabaseTables () {
+function queryDatabase (query) {
 
   return new Promise((resolve, reject) => {
     var connection = mysql.createConnection({
@@ -115,7 +115,7 @@ function getDatabaseTables () {
       database: process.env.MYSQLDATABASE || "test"
     });
 
-    connection.query(`SHOW TABLES`, (error, results) => { 
+    connection.query(query, (error, results) => { 
       if (error) reject(error);
       resolve(results)
     });

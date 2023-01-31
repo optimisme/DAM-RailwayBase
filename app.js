@@ -1,52 +1,62 @@
 const express = require('express')
 const fs = require('fs/promises')
-const https = require('https')
-var mysql = require('mysql2');
 const url = require('url')
-const { v4: uuidv4 } = require('uuid')
 const post = require('./post.js')
+const { v4: uuidv4 } = require('uuid')
 
-// Iniciar servidors HTTP
+// Wait 'ms' milliseconds
+function wait (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+// Start HTTP server
 const app = express()
 
-// Configurar el port del servidor HTTP
+// Set port number
 const port = process.env.PORT || 3000
 
-// Publicar els arxius HTTP de la carpeta 'public'
+// Publish static files from 'public' folder
 app.use(express.static('public'))
 
-// Activar el servidor HTTP
+// Activate HTTP server
 const httpServer = app.listen(port, appListen)
 function appListen () {
-  console.log(`Example app listening for HTTP queries on: ${port}`)
+  console.log(`Listening for HTTP queries on: http://localhost:${port}`)
 }
 
-// Definir URLs del servidor HTTP
-app.get('/direccioURL', getIndex)
-async function getIndex (req, res) {
-  res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-  res.end("Aquestes són les dades que el servidor retorna per un missatge 'GET' a la direcció '/direccioURL'")
-}
-
-// Definir URL per les dades tipus POST
+// Set URL rout for POST queries
 app.post('/dades', getDades)
 async function getDades (req, res) {
-  let receivedPOST = await post.getPostData(req)
+  let receivedPOST = await post.getPostObject(req)
   let result = {};
 
+  var textFile = await fs.readFile("./public/consoles/consoles-list.json", { encoding: 'utf8'})
+  var objConsolesList = JSON.parse(textFile)
+
   if (receivedPOST) {
-    if (receivedPOST.type == "herois") {
-      result = { result: "Has demanat dades tipus 'herois'" }
+    if (receivedPOST.type == "consola") {
+      var objFilteredList = objConsolesList.filter((obj) => { return obj.name == receivedPOST.name })
+      await wait(1500)
+      if (objFilteredList.length > 0) {
+        result = { status: "OK", result: objFilteredList[0] }
+      }
     }
-    if (receivedPOST.type == "bounce") {
-      result = { result: `Has demanat que et reboti el missatge: ${receivedPOST.text}` }
+    if (receivedPOST.type == "marques") {
+      var objBrandsList = objConsolesList.map((obj) => { return obj.brand })
+      await wait(1500)
+      let senseDuplicats = [...new Set(objBrandsList)]
+      result = { status: "OK", result: senseDuplicats.sort() } 
     }
-    if (receivedPOST.type == "broadcast") {
-      result = { result: `Has demanat fer un broadcast del missatge: ${receivedPOST.text}` }
-      broadcast({ type: "broadcastResponse", text: receivedPOST.text })
-    }
-    if (receivedPOST.type == "listTables") {
-      result = { result: await queryDatabase(`SHOW TABLES`) }
+    if (receivedPOST.type == "marca") {
+      var objBrandConsolesList = objConsolesList.filter ((obj) => { return obj.brand == receivedPOST.name })
+      await wait(1500)
+      // Ordena les consoles per nom de model
+      objBrandConsolesList.sort((a,b) => { 
+          var textA = a.name.toUpperCase();
+          var textB = b.name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      })
+      result = { status: "OK", result: objBrandConsolesList } 
     }
   }
 
@@ -54,13 +64,15 @@ async function getDades (req, res) {
   res.end(JSON.stringify(result))
 }
 
+// Run WebSocket server
 const WebSocket = require('ws')
 const wss = new WebSocket.Server({ server: httpServer })
 const socketsClients = new Map()
-console.log(`Example app listening for WebSocket queries on: http://localhost:${port}`)
+console.log(`Listening for WebSocket queries on ${port}`)
 
-
+// What to do when a websocket client connects
 wss.on('connection', (ws) => {
+
   console.log("Client connected")
 
   // Add client to the clients list
@@ -68,6 +80,9 @@ wss.on('connection', (ws) => {
   const color = Math.floor(Math.random() * 360)
   const metadata = { id, color }
   socketsClients.set(ws, metadata)
+
+  // Send clients list to everyone
+  sendClients()
 
   // What to do when a client is disconnected
   ws.on("close", () => {
@@ -83,18 +98,35 @@ wss.on('connection', (ws) => {
     catch (e) { console.log("Could not parse bufferedMessage from WS message") }
 
     if (messageAsObject.type == "bounce") {
-      var rst = { type: "response", text: `Rebotar Websocket: '${messageAsObject.text}'` }
+      var rst = { type: "bounce", message: messageAsObject.message }
       ws.send(JSON.stringify(rst))
     } else if (messageAsObject.type == "broadcast") {
-      var rst = { type: "response", text: `Broadcast Websocket: '${messageAsObject.text}'` }
+      var rst = { type: "broadcast", origin: id, message: messageAsObject.message }
       broadcast(rst)
+    } else if (messageAsObject.type == "private") {
+      var rst = { type: "private", origin: id, destination: messageAsObject.destination, message: messageAsObject.message }
+      private(rst)
     }
   })
 })
 
-// Send a message to all clients
-async function broadcast (obj) {
+// Get clients ids
+function sendClients () {
+  var clients = []
+  socketsClients.forEach((value, key) => {
+    clients.push(value.id)
+  })
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      var id = socketsClients.get(client).id
+      var messageAsString = JSON.stringify({ type: "clients", id: id, list: clients })
+      client.send(messageAsString)
+    }
+  })
+}
 
+// Send a message to all websocket clients
+async function broadcast (obj) {
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       var messageAsString = JSON.stringify(obj)
@@ -103,7 +135,18 @@ async function broadcast (obj) {
   })
 }
 
-// Get the list of database tables from mysql
+// Send a private message to a specific client
+async function private (obj) {
+  wss.clients.forEach((client) => {
+    if (socketsClients.get(client).id == obj.destination && client.readyState === WebSocket.OPEN) {
+      var messageAsString = JSON.stringify(obj)
+      client.send(messageAsString)
+      return
+    }
+  })
+}
+
+// Perform a query to the database
 function queryDatabase (query) {
 
   return new Promise((resolve, reject) => {

@@ -1,0 +1,242 @@
+[
+    {
+        "name": "Xbox Series X",
+        "date": "2020-11-10",
+        "processor": "8-Core AMD Zen 2",
+        "speed": 3.8,
+        "brand": "Microsoft",
+        "color": "black",
+        "sold": 0,
+        "image": "./consoles/microsoft-sx.png"
+    },
+    {
+        "name": "Playstation 5",
+        "date": "2020-11-12",
+        "processor": "8-Core AMD Zen 2",
+        "speed": 3.5,
+        "brand": "Sony",
+        "color": "white",
+        "sold": 0,
+        "image": "./consoles/sony-ps5.png"
+    },
+    {
+        "name": "Nintendo Switch",
+        "date": "2017-3-3",
+        "processor": "4xARM Cortex-A57",
+        "speed": 1.02,
+        "brand": "Nintendo",
+        "color": "black",
+        "sold": 70000000,
+        "image": "./consoles/nintendo-switch.png"
+    },
+    {
+        "name": "Xbox One",
+        "date": "2013-11-22",
+        "processor": "Custom 8-core AMD",
+        "speed": 1.75,
+        "brand": "Microsoft",
+        "color": "black",
+        "sold": 50000000,
+        "image": "./consoles/microsoft-xboxone.png"
+    },
+    {
+        "name": "Playstation 4",
+        "date": "2013-11-15",
+        "processor": "Semi-custom 8-core AMD",
+        "speed": 1.6,
+        "brand": "Sony",
+        "color": "black",
+        "sold": 112000000,
+        "image": "./consoles/sony-ps4.png"
+    },
+    {
+        "name": "Wii U",
+        "date": "2012-11-18",
+        "processor": "IBM PowerPC 750",
+        "speed": 1.24,
+        "brand": "Nintendo",
+        "color": "black",
+        "sold": 14000000,
+        "image": "./consoles/nintendo-wiiu.png"
+    },
+    {
+        "name": "Wii",
+        "date": "2006-11-19",
+        "processor": "IBM PowerPC 750",
+        "speed": 0.72,
+        "brand": "Nintendo",
+        "color": "white",
+        "sold": 101000000,
+        "image": "./consoles/nintendo-wii.png"
+    },
+    {
+        "name": "Playstation 3",
+        "date": "2006-11-11",
+        "processor": "IBM PowerPC Cell",
+        "speed": 3.2,
+        "brand": "Sony",
+        "color": "black",
+        "sold": 87000000,
+        "image": "./consoles/sony-ps3.png"
+    },
+    {
+        "name": "Xbox 360",
+        "date": "2005-11-22",
+        "processor": "IBM PowerPC Tri-core Xenon",
+        "speed": 3.2,
+        "brand": "Microsoft",
+        "color": "white",
+        "sold": 84000000,
+        "image": "./consoles/microsoft-360.png"
+    },
+    {
+        "name": "Xbox",
+        "date": "2001-11-15",
+        "processor": "Intel Pentium III",
+        "speed": 0.733,
+        "brand": "Microsoft",
+        "color": "green",
+        "sold": 24000000,
+        "image": "./consoles/microsoft-xbox.png"
+    },
+    {
+        "name": "GameCube",
+        "date": "2001-11-14",
+        "processor": "IBM PowerPC Gekko",
+        "speed": 0.486,
+        "brand": "Nintendo",
+        "color": "purple",
+        "sold": 22000000,
+        "image": "./consoles/nintendo-gamecube.png"
+    },
+    {
+        "name": "Playstation 2",
+        "date": "2000-3-4",
+        "processor": "Emotion engine",
+        "speed": 0.294,
+        "brand": "Sony",
+        "color": "blue",
+        "sold": 155000000,
+        "image": "./consoles/sony-ps2.png"
+    },
+    {
+        "name": "Dreamcast",
+        "date": "1998-11-27",
+        "processor": "Hitachi SH-4",
+        "speed": 0.2,
+        "brand": "Sega",
+        "color": "white",
+        "sold": 9000000,
+        "image": "./consoles/sega-dreamcast.png"
+    },
+    {
+        "name": "Nintendo 64",
+        "date": "1996-6-23",
+        "processor": "NEC VR4300",
+        "speed": 0.093,
+        "brand": "Nintendo",
+        "color": "black",
+        "sold": 33000000,
+        "image": "./consoles/nintendo-64.png"
+    },
+    {
+        "name": "Apple Bandai",
+        "date": "1993-3-28",
+        "processor": "PowerPC 630",
+        "speed": 0.066,
+        "brand": "Apple",
+        "color": "white",
+        "sold": 42000,
+        "image": "./consoles/apple-bandai.png"
+    },
+    {
+        "name": "Playstation",
+        "date": "1994-12-3",
+        "processor": "R3000",
+        "speed": 0.033,
+        "brand": "Sony",
+        "color": "gray",
+        "sold": 102000000,
+        "image": "./consoles/sony-playstation.png"
+    },
+    {
+        "name": "Sega Saturn",
+        "date": "1994-11-22",
+        "processor": "2x Hitachi SH2",
+        "speed": 0.028,
+        "brand": "Sega",
+        "color": "black",
+        "sold": 9000000,
+        "image": "./consoles/sega-saturn.png"
+    },
+    {
+        "name": "Amiga",
+        "date": "1993-9-17",
+        "processor": "Motorola 68EC020",
+        "speed": 0.014,
+        "brand": "Commodore",
+        "color": "beige",
+        "sold": 4000000,
+        "image": "./consoles/commodore-amiga.png"
+    },
+    {
+        "name": "Sega 32X",
+        "date": "1994-11-21",
+        "processor": "2x SH-2",
+        "speed": 0.023,
+        "brand": "Sega",
+        "color": "black",
+        "sold": 650000,
+        "image": "./consoles/sega-32x.png"
+    },
+    {
+        "name": "Mega Drive",
+        "date": "1988-11-29",
+        "processor": "Motorola 68000",
+        "speed": 0.00358,
+        "brand": "Sega",
+        "color": "black",
+        "sold": 30000000,
+        "image": "./consoles/sega-md.png"
+    },
+    {
+        "name": "Super Nintendo",
+        "date": "1990-11-21",
+        "processor": "Ricoh 5A22",
+        "speed": 0.00358,
+        "brand": "Nintendo",
+        "color": "gray",
+        "sold": 50000000,
+        "image": "./consoles/nintendo-sn.png"
+    },
+    {
+        "name": "NES",
+        "date": "1983-6-15",
+        "processor": "Ricoh 2A03",
+        "speed": 0.00179,
+        "brand": "Nintendo",
+        "color": "white",
+        "sold": 62000000,
+        "image": "./consoles/nintendo-nes.png"
+    },
+    {
+        "name": "Master System",
+        "date": "1985-10-20",
+        "processor": "Zilog Z80",
+        "speed": 0.004,
+        "brand": "Sega",
+        "color": "red",
+        "sold": 12000000,
+        "image": "./consoles/sega-ms.png"
+    },
+    {
+        "name": "Atari 7800",
+        "date": "1986-5-1",
+        "processor": "6502C",
+        "speed": 0.00179,
+        "brand": "Atari",
+        "color": "black",
+        "sold": 4000000,
+        "image": "./consoles/atari-7800.png"
+    }
+]

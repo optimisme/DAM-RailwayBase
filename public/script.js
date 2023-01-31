@@ -6,27 +6,37 @@ function wait (time) {
     })
 }
 
-// Enviar un missatge de tipus "herois" al servidor
-function sendHerois () {
-    loadData({
-        type: "herois"
+// Enviar un missatge de tipus "consola" al servidor
+async function mostraConsola (nom) {
+    var obj = await loadData({
+        type: "consola",
+        name: nom
     })
+
+    // Mostrar les dades rebudes
+    var refData = document.getElementById("data")
+    refData.innerHTML = `
+    <h2>${obj.result.name}</h2>
+    <p>Any: ${obj.result.date}</p>
+    <p>Marca: ${obj.result.brand}</p>
+    <img src="${obj.result.image}"/>`
 }
 
-// Enviar un missatge de tipus "bounce" o "broadcast" al servidor
-function sendMessage (messageType) {
-    let txtMissatge = document.getElementById("missatge").value
-    loadData({
-        type: messageType,
-        text: txtMissatge
+// Enviar un missatge de tipus "marques" al servidor
+async function mostraMarques () {
+    var obj = await loadData({
+        type: "marques"
     })
+
+    var refData = document.getElementById("data")
+    refData.innerHTML = JSON.stringify(obj.result)
 }
 
 // Aquesta funció carrega dades del servidor amb "POST"
 async function loadData (dataObj) {
 
     // Mostra 'Carregant dades...' mentre espera
-    refData = document.getElementById("data")
+    var refData = document.getElementById("data")
     refData.innerHTML = "Carregant dades..."
 
     // Prepara la crida POST
@@ -46,12 +56,19 @@ async function loadData (dataObj) {
     // Forcem una espera
     await wait(500) 
     
-    // Mostrar les dades rebudes
-    refData.innerHTML = JSON.stringify(obj)
+    return obj
+}
+
+// Enviar un missatge de tipus "bounce" o "broadcast" al servidor
+function sendMessage (messageType, txtMessage) {
+    sendWebSocket({
+        type: messageType,
+        message: txtMessage
+    })
 }
 
 // Iniciar el client WebSocket
-let locationWebSockets = window.location.origin.replace("http", "ws") // "ws://localhost:3000"
+let locationWebSockets = window.location.origin.replace("http", "ws") // "ws://localhost:8888"
 let webSocket;
 function initWebSocket () {
     webSocket = new WebSocket(locationWebSockets)
@@ -63,16 +80,13 @@ function initWebSocket () {
     })
     webSocket.addEventListener('error', (event) => { console.error(event) })
     webSocket.addEventListener('message', (event) => {
-        let refDataWS = document.getElementById('dataWebSockets')
-        refDataWS.innerHTML = event.data
+        let refMessage = document.getElementById('message')
+        refMessage.innerHTML = event.data
     })
 }
 initWebSocket()
 
-async function sendWebSocket () {
-    let txtMissatge = document.getElementById("missatge").value
-    webSocket.send(JSON.stringify({
-        type: "bounce",
-        text: txtMissatge
-    }))
+async function sendWebSocket (obj) {
+    webSocket.send(JSON.stringify(obj))
 }
+

@@ -1,34 +1,14 @@
-Instal·lar comanda Railway:
+Aquest exemple de servidor mostra:
 
-    npm i -g @railway/cli
+- Com servir arxius de la carpeta "public"
+- Com crear crides GET amb "app.get"
+- Com crear crides POST amb "app.post"
+- Com comunicar-se amb el servidor a través de WebSockets
 
-Linkar projecte amg Railway:
+Posar-lo en funcionament:
 
-    railway login --browserless
-    railway init
-    (Definir un nom de projecte "Server")
-    railway link
+npm run dev
 
-Fer anar el projecte al servidor Railway:
+Per veure com funciona anar amb un navegador a la direcció:
 
-    * Configurar el projecte Railway: Settings > "Start Command" amb: 
-
-        npm start
-
-    * Configurar el projecte Railway: Settings > Domains amb un domini
-
-    * En local executar:
-
-        railway run npm start
-
-Actualitzar canvis al servidor Railway:
-
-    git add .
-    git commit -m "Canvis ..."
-    git push
-    railway up
-
-Ajuda Railway:
-
-https://docs.railway.app/reference/cli-api
-
+http://localhost:3000

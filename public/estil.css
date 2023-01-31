@@ -3,9 +3,3 @@ body {
     margin: 0;
     user-select: none;
 }
-
-.answer {
-    border: solid 1px grey;
-    height: 75px;
-    width: 400px;
-}

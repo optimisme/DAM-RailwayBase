@@ -14,19 +14,15 @@
         <title>Pàgina principal</title>
     </head>
     <body>
-        <br/><a href="/direccioURL">GET a la /direccioURL (navegar-hi normalment)</a>
+        <br/><button onclick="mostraConsola('GameCube')">GameCube</button>
+        <br/><button onclick="mostraConsola('Xbox One')">Xbox One</button>
+        <br/><button onclick="mostraConsola('Playstation 3')">Playstation 3</button>
+        <br/><button onclick="mostraMarques()">Llista de marques</button>
+        <br/><button onclick="sendMessage('broadcast', 'hola')">Broadcast</button>
+        <br/><button onclick="sendMessage('bounce', 'rebota')">Bounce</button>
         <br/><br/>
-        <br/>Missatge: <input type="text" id="missatge"/>
-        <br/><button onclick="sendHerois()">Enviar Herois</button>POST amb parametre: "type": "herois"
-        <br/><button onclick="sendMessage('bounce')">Enviar Bounce</button>POST amb parametres: "type": "bounce", "value": (el valor del camp de text 'missatge')
-        <br/><button onclick="sendMessage('broadcast')">Enviar Broadcast</button>POST amb parametres "type": "broadcast", "value": (el valor del camp de text 'missatge')
-        <br/><button onclick="sendWebSocket()">Enviar amb WebSockets</button>Enviar el valor del camp de text 'missatge' per WebSockets
-        <br/><br/>
-        <br/><button onclick="sendMessage('listTables')">Llistar taules de la base de dades</button>POST amb: { "type": "listTables" }
-        <br/><br/>
-        <br/>Missatges rebuts amb POST:
-        <br/><div id="data" class="answer"></div>
-        <br/>Missatges rebuts amb WebSockets:
-        <br/><div id="dataWebSockets"class="answer"></div>
+        <br/>Dades de la consola:
+        <br/><div id="data"></div>
+        <br/><div id="message"></div>
     </body>
 </html>

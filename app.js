@@ -28,7 +28,7 @@ function appListen () {
 app.post('/dades', getDades)
 async function getDades (req, res) {
   let receivedPOST = await post.getPostObject(req)
-  let result = {};
+  let result = { status: "KO", result: "Unkown type" };
 
   var textFile = await fs.readFile("./public/consoles/consoles-list.json", { encoding: 'utf8'})
   var objConsolesList = JSON.parse(textFile)
